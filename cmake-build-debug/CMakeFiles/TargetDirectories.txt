@@ -1,0 +1,7 @@
+/home/spl211/Desktop/LAB3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/spl211/Desktop/LAB3/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/spl211/Desktop/LAB3/cmake-build-debug/CMakeFiles/mergeSort.dir
+/home/spl211/Desktop/LAB3/cmake-build-debug/CMakeFiles/PrintHex.dir
+/home/spl211/Desktop/LAB3/cmake-build-debug/CMakeFiles/T2.dir
+/home/spl211/Desktop/LAB3/cmake-build-debug/CMakeFiles/T1c.dir
+/home/spl211/Desktop/LAB3/cmake-build-debug/CMakeFiles/T1a.dir
