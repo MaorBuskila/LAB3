@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: LAB3_2
+# Project: LAB3
 # Configurations: Debug
 # =============================================================================
 
@@ -84,14 +84,14 @@ build CMakeFiles/mergeSort.dir/t0/Task_0a/lab3_mergesort.c.o: C_COMPILER__mergeS
 
 
 #############################################
-# Link the executable mergeSort
+# Link the executable ../mergeSort
 
-build mergeSort: C_EXECUTABLE_LINKER__mergeSort_Debug CMakeFiles/mergeSort.dir/t0/Task_0a/lab3_mergesort.c.o
+build ../mergeSort: C_EXECUTABLE_LINKER__mergeSort_Debug CMakeFiles/mergeSort.dir/t0/Task_0a/lab3_mergesort.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/mergeSort.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = mergeSort
+  TARGET_FILE = ../mergeSort
   TARGET_PDB = mergeSort.dbg
 
 # =============================================================================
@@ -115,14 +115,14 @@ build CMakeFiles/PrintHex.dir/t0/Task_0b/printHex.c.o: C_COMPILER__PrintHex_Debu
 
 
 #############################################
-# Link the executable PrintHex
+# Link the executable ../PrintHex
 
-build PrintHex: C_EXECUTABLE_LINKER__PrintHex_Debug CMakeFiles/PrintHex.dir/t0/Task_0b/printHex.c.o
+build ../PrintHex: C_EXECUTABLE_LINKER__PrintHex_Debug CMakeFiles/PrintHex.dir/t0/Task_0b/printHex.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/PrintHex.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = PrintHex
+  TARGET_FILE = ../PrintHex
   TARGET_PDB = PrintHex.dbg
 
 # =============================================================================
@@ -146,14 +146,14 @@ build CMakeFiles/T2.dir/t2/task2b.c.o: C_COMPILER__T2_Debug /home/spl211/Desktop
 
 
 #############################################
-# Link the executable T2
+# Link the executable ../T2
 
-build T2: C_EXECUTABLE_LINKER__T2_Debug CMakeFiles/T2.dir/t2/task2b.c.o
+build ../T2: C_EXECUTABLE_LINKER__T2_Debug CMakeFiles/T2.dir/t2/task2b.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/T2.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = T2
+  TARGET_FILE = ../T2
   TARGET_PDB = T2.dbg
 
 # =============================================================================
@@ -177,14 +177,14 @@ build CMakeFiles/T1c.dir/t1c/task1c.c.o: C_COMPILER__T1c_Debug /home/spl211/Desk
 
 
 #############################################
-# Link the executable T1c
+# Link the executable ../T1c
 
-build T1c: C_EXECUTABLE_LINKER__T1c_Debug CMakeFiles/T1c.dir/t1c/task1c.c.o
+build ../T1c: C_EXECUTABLE_LINKER__T1c_Debug CMakeFiles/T1c.dir/t1c/task1c.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/T1c.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = T1c
+  TARGET_FILE = ../T1c
   TARGET_PDB = T1c.dbg
 
 # =============================================================================
@@ -208,18 +208,28 @@ build CMakeFiles/T1a.dir/t1a/main.c.o: C_COMPILER__T1a_Debug /home/spl211/Deskto
 
 
 #############################################
-# Link the executable T1a
+# Link the executable ../T1a
 
-build T1a: C_EXECUTABLE_LINKER__T1a_Debug CMakeFiles/T1a.dir/t1a/main.c.o
+build ../T1a: C_EXECUTABLE_LINKER__T1a_Debug CMakeFiles/T1a.dir/t1a/main.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/T1a.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = T1a
+  TARGET_FILE = ../T1a
   TARGET_PDB = T1a.dbg
 
 # =============================================================================
 # Target aliases.
+
+build PrintHex: phony ../PrintHex
+
+build T1a: phony ../T1a
+
+build T1c: phony ../T1c
+
+build T2: phony ../T2
+
+build mergeSort: phony ../mergeSort
 
 # =============================================================================
 # Folder targets.
@@ -229,7 +239,7 @@ build T1a: C_EXECUTABLE_LINKER__T1a_Debug CMakeFiles/T1a.dir/t1a/main.c.o
 #############################################
 # Folder: /home/spl211/Desktop/LAB3/cmake-build-debug
 
-build all: phony mergeSort PrintHex T2 T1c T1a
+build all: phony ../mergeSort ../PrintHex ../T2 ../T1c ../T1a
 
 # =============================================================================
 # Built-in targets

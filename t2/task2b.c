@@ -18,11 +18,6 @@ struct link {
 link *virusList;
 FILE *output;
 
-void virusDistrctor(virus *vir) {
-    free(vir->sig);
-    free(vir);
-}
-
 int getVirusLen(FILE *input) {
     char len[2] = {0, 0};
     fread(len, sizeof(unsigned char), 2, input);
@@ -53,7 +48,7 @@ void printVirus(virus *vir, FILE *output) {
 void listPrint(link *virus_list, FILE *output) {
     /* Print the data of every link in list to the given stream. Each item followed by a newline character. */
     link *curr = virus_list;
-    while (curr->nextVirus != NULL) {
+    while (curr!= NULL) {
         printVirus(curr->vir, output);
         curr = curr->nextVirus;
     }
@@ -67,19 +62,22 @@ int findSize(FILE *file) {
     return size;
 }
 
-link* listAppend(link *virus_list, link *to_add) {
+link *listAppend(link *virus_list, link *add_to_next) {
     if (virus_list == NULL) {
-        virus_list = to_add;
+        virus_list = add_to_next;
         return virus_list;
     }
-
     link *curr = virus_list;
     link *first = virus_list;
     while (curr->nextVirus != NULL)
         curr = curr->nextVirus;
-    curr->nextVirus = to_add;
+    curr->nextVirus = add_to_next;
 
     return first;
+}
+void virusDistrctor(virus *vir) {
+    free(vir->sig);
+    free(vir);
 }
 
 void listFree(link *virus_list) {
@@ -93,7 +91,6 @@ void listFree(link *virus_list) {
         free(temp_link);
     }
 }
-
 
 void quit() {
     listFree(virusList);
@@ -114,15 +111,14 @@ void printSignatures() {
 }
 
 void loadSignatures() {
-    char inp[256];
-    scanf("%s", inp);
-    FILE *input = fopen(inp, "rb");
-
+    char filename[256];
+    scanf("%s", filename);
+//    FILE *input = fopen("/home/spl211/Desktop/LAB3/t2/signatures", "rb");
+    FILE *input = fopen(filename, "rb");
     if (input == NULL) {
-        printf("No valid file");
+        printf("File is not valid!\n");
         return;
     }
-
     link *virus_list = (link *) calloc(1, sizeof(link));
     virus *vir = (virus *) calloc(1, sizeof(virus));
     readVirus(vir, input);
@@ -130,30 +126,25 @@ void loadSignatures() {
     link *curr = virus_list;
 
     while (!feof(input)) {
-        //Create next virus
         link *next = (link *) calloc(1, sizeof(link));
         virus *vir = (virus *) calloc(1, sizeof(virus));
         readVirus(vir, input);
-        if (vir->SigSize >= 60000 || vir->SigSize == 0) {
-            virusDistrctor(vir);
-            free(next);
-            break;
-        }
-
         next->vir = vir;
+        if (vir->SigSize == 0) {
+          virusDistrctor(vir);
+          free(next);
+          break;
+        }
         curr = listAppend(curr, next);
         curr = curr->nextVirus;
     }
-
-
     virusList = virus_list;
     fclose(input);
 }
 
 void detectVirus(char *buffer, unsigned int size, link *virus_list, FILE *input) {
-
     if (virus_list == NULL) {
-        printf("No viruses has been loaded first");
+        printf("Virus list is empty");
         return;
     }
     fread(buffer, sizeof(unsigned char), size, input);
@@ -165,8 +156,8 @@ void detectVirus(char *buffer, unsigned int size, link *virus_list, FILE *input)
                 curr = curr->nextVirus;
                 continue;
             }
-            int indicator = memcmp(buffer + i, curr->vir->sig, curr->vir->SigSize);
-            if (!indicator) {
+            int cmp_flag = memcmp(buffer + i, curr->vir->sig, curr->vir->SigSize);
+            if (!cmp_flag) {
                 printf("Starting byte: %d\n", i);
                 printf("Virus name: %s\n", curr->vir->virusName);
                 printf("Size of Virus: %d\n", curr->vir->SigSize);
@@ -179,12 +170,13 @@ void detectVirus(char *buffer, unsigned int size, link *virus_list, FILE *input)
 void detect() {
     char *buffer = (char *) malloc(10000 * sizeof(unsigned char));
     char fileName[256];
-    printf("Enter name of file to be scanned \n");
+    printf("Enter name of file \n");
     scanf("%s", fileName);
-    FILE *input = fopen(fileName, "rb");
+    FILE *input = fopen("/home/spl211/Desktop/LAB3/t2/infected", "rb");
+//    FILE *input = fopen(fileName, "rb");
 
     if (input == NULL) {
-        printf("No valid file");
+        printf("File is not valid");
         return;
     }
     int fileSize = findSize(input);
@@ -195,16 +187,18 @@ void detect() {
 }
 
 void killVirus(char *fileName, int signatureOffset, int signatureSize) {
+//    FILE *input = fopen("/home/spl211/Desktop/LAB3/t2/infected", "rb+");
     FILE *input = fopen(fileName, "rb+");
+    if (input == NULL) {
+        printf("File is not valid\n");
+        return;
+    }
     fseek(input, signatureOffset, SEEK_SET);
-    printf("%ld \n", ftell(input));
-    printf("%d\n", signatureOffset);
-    char nopArr[signatureSize];
-
+    char nopArray[signatureSize];
     for (int i = 0; i < signatureSize; i++)
-        nopArr[i] = 0x90; // NOP (eax)
+        nopArray[i] = 0x90; // NOP (eax)
 
-    fwrite(nopArr, sizeof(unsigned char), signatureSize, input);
+    fwrite(nopArray, sizeof(unsigned char), signatureSize, input);
     fclose(input);
 
 }
@@ -213,13 +207,14 @@ void fixFile() {
     int startingByte;
     int signatureSize;
     char fileName[256];
-    printf("Enter starting byte location in the suspected file \n");
+    printf("Enter starting byte location in the infected file \n");
     scanf("%d", &startingByte);
     printf("Enter the size of the virus signature \n");
     scanf("%d", &signatureSize);
     printf("Enter the file name \n");
     scanf("%s", fileName);
     killVirus(fileName, startingByte, signatureSize);
+    printf("Fixing Complete \n");
 }
 
 struct fun_desc menu[] =
@@ -231,9 +226,7 @@ struct fun_desc menu[] =
          {NULL, NULL}};
 
 void printMenu(int length) {
-    printf("#> menu \n");
-    printf("Please choose a function: \n");
-
+    printf("#> menu \n Please choose a function: \n");
     for (int i = 1; i <= length; i++) {
         printf("%d) %s \n", i, menu[i - 1].name);
     }
@@ -247,13 +240,13 @@ int main(int argc, char **argv) {
         int functionIndex;
         printMenu(5);
         scanf("%d", &functionIndex);
-        fgetc(stdin); // eat the enter
-        if (functionIndex < 1 || functionIndex > 5) {
-            printf("Index isn't valid, please try again  \n");
+        fgetc(stdin); //Skip '\n'
+        if (functionIndex >= 1 && functionIndex <= 5) {
+            void (*func_ptr)() = menu[functionIndex - 1].fun;
+            (*func_ptr)();
+        } else {
+            printf("Index isn't valid\n");
             continue;
         }
-        void (*func_ptr)() = menu[functionIndex - 1].fun;
-        (*func_ptr)();
     }
-
 }
