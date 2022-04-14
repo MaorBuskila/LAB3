@@ -1,0 +1,96 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "LAB3",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "PrintHex::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-PrintHex-Debug-a1ceb9d5e820db956a59.json",
+					"name" : "PrintHex",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "T1a::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-T1a-Debug-d9b7f0ac9158d73a7fb4.json",
+					"name" : "T1a",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "T1c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-T1c-Debug-4c3829f9f72e3b66bf8a.json",
+					"name" : "T1c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "T2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-T2-Debug-705bbe48fe1a4ee6b3d1.json",
+					"name" : "T2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "mergeSort::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-mergeSort-Debug-f72a3667fc989d602f5d.json",
+					"name" : "mergeSort",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/spl211/Desktop/LAB3/cmake-build-debug",
+		"source" : "/home/spl211/Desktop/LAB3"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}
